@@ -1,0 +1,70 @@
+<!-- customize header css -->
+
+<p>Grafana customized header is active</p>
+<style type="text/css">
+  .view-mode--kiosk .scroll-canvas--dashboard{
+    height:90%
+  }
+
+  .view-mode--kiosk .navbar {
+    display: {{ctrl.showNavBar()?'flex':'none'}}
+  }
+
+  .view-mode--kiosk panel-plugin-grafana-customize-header div {
+    display: {{ctrl.panel.kioskMode.pluginPanel?'flex':'none'}};
+  }
+
+  .view-mode--tv panel-plugin-grafana-customize-header div {
+    display: {{ctrl.panel.tvMode.pluginPanel?'flex':'none'}};
+  }
+
+  .view-mode--kiosk .sidemenu,
+  .view-mode--kiosk .navbar-page-btn{
+    display: {{ctrl.panel.kioskMode.dashboardTitle?'flex':'none'}};
+  }
+
+  .view-mode--tv .sidemenu,
+  .view-mode--tv .navbar-page-btn {
+    display: {{ctrl.panel.tvMode.dashboardTitle?'flex':'none'}};
+  }
+
+  .view-mode--kiosk .navbar-buttons--actions {
+    display: {{ctrl.panel.kioskMode.actionButtons?'flex':'none'}};
+  }
+
+  .view-mode--tv .navbar-buttons--actions {
+    display: {{ctrl.panel.tvMode.actionButtons?'flex':'none'}};
+  }
+
+  .view-mode--kiosk .navbar-button--tv {
+    display: {{ctrl.panel.kioskMode.cycleViewButton?'flex':'none'}};
+  }
+
+  .view-mode--tv .navbar-button--tv {
+    display: {{ctrl.panel.tvMode.cycleViewButton?'flex':'none'}};
+  }
+
+  .view-mode--kiosk  .gf-timepicker-nav {
+    display: {{ctrl.panel.kioskMode.datePicker?'flex':'none'}};
+  }
+
+  .view-mode--tv .gf-timepicker-nav {
+    display: {{ctrl.panel.tvMode.datePicker?'flex':'none'}};
+  }
+
+  .view-mode--kiosk .navbar-button--zoom {
+    display: {{ctrl.panel.kioskMode.timeRangeZoomButton?'flex':'none'}};
+  }
+
+  .view-mode--tv .navbar-button--zoom {
+    display: {{ctrl.panel.tvMode.timeRangeZoomButton?'flex':'none'}};
+  }
+
+  .view-mode--kiosk .navbar-button--refresh, {
+    display: {{ctrl.panel.kioskMode.refreshButton ? 'flex' : 'none'}};
+  }
+
+  .view-mode--tv .navbar-button--refresh, {
+    display: {{ctrl.panel.tvMode.refreshButton?'flex':'none'}};
+  }
+</style>

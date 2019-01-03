@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/module.js"],"names":["CustomizeHeaderCtrl"],"mappings":";;;;;;;;AACQA,yB,0BAAAA,mB;;;2BAINA,mB","file":"module.js","sourcesContent":["/* eslint import/no-extraneous-dependencies: 0 */\nimport {CustomizeHeaderCtrl} from './customize_header_ctrl';\n\n/* eslint import/prefer-default-export: 0 */\nexport {\n  CustomizeHeaderCtrl as PanelCtrl\n};\n"]}
