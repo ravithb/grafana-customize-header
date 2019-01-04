@@ -19,7 +19,8 @@ const panelDefaults = {
     datePicker: true,
     timeRangeZoomButton: true,
     refreshButton: true
-  }
+  },
+  disableEscInKioskMode: true
 }
 export class CustomizeHeaderCtrl extends PanelCtrl {
   static templateUrl = 'module.html';
@@ -28,15 +29,13 @@ export class CustomizeHeaderCtrl extends PanelCtrl {
     super($scope, $injector);
     _.defaults(this.panel, panelDefaults);
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
-    
+    var currentPanel = this.panel;
     $scope.$on('$locationChangeSuccess', function($event, next, current) { 
-      if($routeParams['kiosk']){
+      if ($routeParams['kiosk'] && currentPanel.disableEscInKioskMode){
         $window.Mousetrap.bind('esc', function() { 
-          console.log("Mode change by ESC key is disabled"); 
+          console.log("Mode change by ESC key is disabled in panel settings"); 
         });
-      }else {
-        $window.Mousetrap.unbind('esc');
-      }
+      } 
     });
 
     
