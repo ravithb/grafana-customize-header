@@ -1,5 +1,8 @@
 import { PanelCtrl } from 'app/plugins/sdk';
 import _ from 'lodash';
+import renderer from './renderer';
+
+var Mousetrap;
 
 const panelDefaults = {
   tvMode : {
@@ -23,11 +26,24 @@ const panelDefaults = {
 }
 export class CustomizeHeaderCtrl extends PanelCtrl {
   static templateUrl = 'module.html';
+  disableEscKey = false;
 
-  constructor($scope, $injector, contextSrv, datasourceSrv, variableSrv) {
+  constructor($scope, $injector, $routeParams, $window, contextSrv, datasourceSrv, variableSrv) {
     super($scope, $injector);
     _.defaults(this.panel, panelDefaults);
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
+    
+    $scope.$on('$locationChangeSuccess', function($event, next, current) { 
+      if($routeParams['kiosk']){
+        $window.Mousetrap.bind('esc', function() { 
+          console.log("Mode change by ESC key is disabled"); 
+        });
+      }else {
+        $window.Mousetrap.unbind('esc');
+      }
+    });
+
+    
   }
 
   updatePanel() {
@@ -45,4 +61,9 @@ export class CustomizeHeaderCtrl extends PanelCtrl {
   onInitEditMode() {
     this.addEditorTab('Customize Header', 'public/plugins/grafana-customize-header/partials/editor.html', 2);
   }
+
+  // /* eslint class-methods-use-this: 0 */
+  // link(scope, elem, attrs, ctrl) {
+  //   renderer(scope, elem, attrs, ctrl);
+  // }
 }

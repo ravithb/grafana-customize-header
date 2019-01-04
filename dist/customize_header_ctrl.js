@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['app/plugins/sdk', 'lodash'], function (_export, _context) {
+System.register(['app/plugins/sdk', 'lodash', './renderer'], function (_export, _context) {
   "use strict";
 
-  var PanelCtrl, _, _createClass, panelDefaults, CustomizeHeaderCtrl;
+  var PanelCtrl, _, renderer, _createClass, Mousetrap, panelDefaults, CustomizeHeaderCtrl;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -40,6 +40,8 @@ System.register(['app/plugins/sdk', 'lodash'], function (_export, _context) {
       PanelCtrl = _appPluginsSdk.PanelCtrl;
     }, function (_lodash) {
       _ = _lodash.default;
+    }, function (_renderer) {
+      renderer = _renderer.default;
     }],
     execute: function () {
       _createClass = function () {
@@ -84,13 +86,26 @@ System.register(['app/plugins/sdk', 'lodash'], function (_export, _context) {
       _export('CustomizeHeaderCtrl', CustomizeHeaderCtrl = function (_PanelCtrl) {
         _inherits(CustomizeHeaderCtrl, _PanelCtrl);
 
-        function CustomizeHeaderCtrl($scope, $injector, contextSrv, datasourceSrv, variableSrv) {
+        function CustomizeHeaderCtrl($scope, $injector, $routeParams, $window, contextSrv, datasourceSrv, variableSrv) {
           _classCallCheck(this, CustomizeHeaderCtrl);
 
           var _this = _possibleConstructorReturn(this, (CustomizeHeaderCtrl.__proto__ || Object.getPrototypeOf(CustomizeHeaderCtrl)).call(this, $scope, $injector));
 
+          _this.disableEscKey = false;
+
           _.defaults(_this.panel, panelDefaults);
           _this.events.on('init-edit-mode', _this.onInitEditMode.bind(_this));
+
+          $scope.$on('$locationChangeSuccess', function ($event, next, current) {
+            if ($routeParams['kiosk']) {
+              $window.Mousetrap.bind('esc', function () {
+                console.log("Mode change by ESC key is disabled");
+              });
+            } else {
+              $window.Mousetrap.unbind('esc');
+            }
+          });
+
           return _this;
         }
 
