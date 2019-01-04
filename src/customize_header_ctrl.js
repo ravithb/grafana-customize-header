@@ -1,8 +1,5 @@
 import { PanelCtrl } from 'app/plugins/sdk';
 import _ from 'lodash';
-import renderer from './renderer';
-
-var Mousetrap;
 
 const panelDefaults = {
   tvMode : {
@@ -26,7 +23,6 @@ const panelDefaults = {
 }
 export class CustomizeHeaderCtrl extends PanelCtrl {
   static templateUrl = 'module.html';
-  disableEscKey = false;
 
   constructor($scope, $injector, $routeParams, $window, contextSrv, datasourceSrv, variableSrv) {
     super($scope, $injector);
@@ -61,9 +57,4 @@ export class CustomizeHeaderCtrl extends PanelCtrl {
   onInitEditMode() {
     this.addEditorTab('Customize Header', 'public/plugins/grafana-customize-header/partials/editor.html', 2);
   }
-
-  // /* eslint class-methods-use-this: 0 */
-  // link(scope, elem, attrs, ctrl) {
-  //   renderer(scope, elem, attrs, ctrl);
-  // }
 }
