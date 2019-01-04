@@ -78,7 +78,8 @@ System.register(['app/plugins/sdk', 'lodash'], function (_export, _context) {
           datePicker: true,
           timeRangeZoomButton: true,
           refreshButton: true
-        }
+        },
+        disableEscInKioskMode: true
       };
 
       _export('CustomizeHeaderCtrl', CustomizeHeaderCtrl = function (_PanelCtrl) {
@@ -91,14 +92,12 @@ System.register(['app/plugins/sdk', 'lodash'], function (_export, _context) {
 
           _.defaults(_this.panel, panelDefaults);
           _this.events.on('init-edit-mode', _this.onInitEditMode.bind(_this));
-
+          var currentPanel = _this.panel;
           $scope.$on('$locationChangeSuccess', function ($event, next, current) {
-            if ($routeParams['kiosk']) {
+            if ($routeParams['kiosk'] && currentPanel.disableEscInKioskMode) {
               $window.Mousetrap.bind('esc', function () {
-                console.log("Mode change by ESC key is disabled");
+                console.log("Mode change by ESC key is disabled in panel settings");
               });
-            } else {
-              $window.Mousetrap.unbind('esc');
             }
           });
 
